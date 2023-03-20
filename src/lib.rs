@@ -2768,6 +2768,19 @@ mod bigdecimal_tests {
     }
 
     #[test]
+    fn round_large_number() {
+        use super::BigDecimal;
+
+        let z = BigDecimal::from_str("3.4613133327063255443352353815722045816611958409944513040035462804475524").unwrap();
+        let expected = BigDecimal::from_str("11.98068998717057027117831038176842424089721245689422762852009735276472").unwrap();
+        let zsq = &z*&z;
+        dbg!(&zsq);
+        let zsq = zsq.round(70);
+        dbg!(&zsq);
+        debug_assert_eq!(zsq, expected);
+    }
+
+    #[test]
     fn test_is_integer() {
         let true_vals = vec![
             "100",
